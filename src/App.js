@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ChessBoard, Dialog } from './components';
+import { CHESS_TYPES } from './utils/constants';
+import { setEmptyChessMap, updateChessMap, getWinningChessType } from './utils/functions';
 
 function App() {
+  const FIRST_TURN_COLOR = CHESS_TYPES.BLACK;
+  const [chessOrder, setChessOrder] = useState([]);
+  const [chessTurn, setChessTurn] = useState(FIRST_TURN_COLOR);
+  const chessMap = setEmptyChessMap();
+  const chessTypeHasWon = getWinningChessType(chessOrder);
+  updateChessMap(chessOrder, chessMap);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ChessBoard
+        chessMap={chessMap}
+        chessTurn={chessTurn}
+        hasWon={!!chessTypeHasWon}
+        setChessOrder={setChessOrder}
+        setChessTurn={setChessTurn}
+      />
+      <Dialog
+        firstTurnColor={FIRST_TURN_COLOR}
+        chessTypeHasWon={chessTypeHasWon}
+        setChessOrder={setChessOrder}
+        setChessTurn={setChessTurn}
+      />
+    </>
   );
 }
 

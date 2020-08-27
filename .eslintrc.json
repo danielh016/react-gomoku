@@ -1,0 +1,16 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["airbnb", "plugin:jsx-a11y/recommended", "prettier", "prettier/react"],
+  "plugins": ["jsx-a11y", "prettier", "react-hooks"],
+  "parser": "babel-eslint",
+  "rules": {
+    // to correct eslint line break error in windows
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "complexity": ["error", { "max": 6 }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/label-has-associated-control": "off"
+  }
+}
