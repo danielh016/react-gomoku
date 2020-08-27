@@ -1,0 +1,11 @@
+export const CHESS_TYPES = {
+  BLACK: 'BLACK',
+  WHITE: 'WHITE',
+  EMPTY: 'EMPTY',
+};
+
+export const DIRECTIONS = {
+  HORIZONTAL: 'HORIZONTAL',
+  VERTICAL: 'VERTICAL',
+  DIAGONAL: 'DIAGONAL',
+};
