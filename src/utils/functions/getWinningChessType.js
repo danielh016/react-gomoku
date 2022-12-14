@@ -20,11 +20,19 @@ const getChessNextToCurrent = (currentChess, chessOrder, direction) => {
       );
       break;
     }
-    case DIRECTIONS.DIAGONAL: {
+    case DIRECTIONS.DIAGONAL_TOPLEFT_BOTTOMRIGHT: {
       chessNextToCurrent = chessOrder.find(
         (otherChess) =>
           parseInt(otherChess.xIndex, 10) === parseInt(currentChess.xIndex, 10) + 1 &&
           parseInt(otherChess.yIndex, 10) === parseInt(currentChess.yIndex, 10) + 1
+      );
+      break;
+    }
+    case DIRECTIONS.DIAGONAL_TOPRIGHT_BOTTOMLEFT: {
+      chessNextToCurrent = chessOrder.find(
+        (otherChess) =>
+          parseInt(otherChess.xIndex, 10) === parseInt(currentChess.xIndex, 10) + 1 &&
+          parseInt(otherChess.yIndex, 10) === parseInt(currentChess.yIndex, 10) - 1
       );
       break;
     }
@@ -69,7 +77,8 @@ const getWinningChessType = (chessOrder) => {
     const hasWon =
       checkHasWonWithDirection(currentChess, chessOrder, DIRECTIONS.HORIZONTAL) ||
       checkHasWonWithDirection(currentChess, chessOrder, DIRECTIONS.VERTICAL) ||
-      checkHasWonWithDirection(currentChess, chessOrder, DIRECTIONS.DIAGONAL);
+      checkHasWonWithDirection(currentChess, chessOrder, DIRECTIONS.DIAGONAL_TOPLEFT_BOTTOMRIGHT) ||
+      checkHasWonWithDirection(currentChess, chessOrder, DIRECTIONS.DIAGONAL_TOPRIGHT_BOTTOMLEFT);
     if (hasWon) {
       return currentChess.chessType;
     }
