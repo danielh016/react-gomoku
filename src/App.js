@@ -6,8 +6,7 @@ import { Chat, ChessBoard, Dialog, Entry } from './components';
 import { CHESS_TYPES } from './utils/constants';
 import { setEmptyChessMap, updateChessMap, getWinningChessType } from './utils/functions';
 
-const ENDPOINT = 'http://54.237.203.190:4000';
-
+const ENDPOINT = 'http://54.174.113.189:4000';
 let socket;
 
 const App = () => {
