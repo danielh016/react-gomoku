@@ -2,26 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DialogContainer, VictoryMessage, ResetButton } from './dialogStyles';
 
-const Dialog = ({ firstTurnColor, chessTypeHasWon, setChessOrder, setChessTurn }) => {
+const Dialog = ({ chessTypeHasWon, socket }) => {
   const handleReset = () => {
-    setChessOrder([]);
-    setChessTurn(firstTurnColor);
+    socket.emit('resetChessMap');
+  };
+
+  const handleUndo = () => {
+    socket.emit('undoChessAction');
   };
 
   return (
     <DialogContainer>
       {chessTypeHasWon && <VictoryMessage>{`${chessTypeHasWon} has won`}</VictoryMessage>}
       <ResetButton onClick={handleReset}>Reset</ResetButton>
+      <ResetButton onClick={handleUndo}>Undo</ResetButton>
     </DialogContainer>
   );
   // Timer
 };
 
 Dialog.propTypes = {
-  firstTurnColor: PropTypes.string.isRequired,
   chessTypeHasWon: PropTypes.string,
-  setChessOrder: PropTypes.func.isRequired,
-  setChessTurn: PropTypes.func.isRequired,
 };
 
 Dialog.defaultProps = {

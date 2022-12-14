@@ -7,9 +7,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "prop-types": "^15.7.2",
+    "query-string": "^8.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^6.4.5",
     "react-scripts": "3.4.3",
+    "react-scroll-to-bottom": "^4.2.0",
+    "socket.io-client": "^4.5.4",
     "styled-components": "^5.1.1"
   },
   "scripts": {

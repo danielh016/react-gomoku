@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ChessContainer, BlackChess, WhiteChess, EmptyGrid } from './chessStyles';
 import { CHESS_TYPES } from '../../../../utils/constants';
 
-const Chess = ({ chessType, chessTurn, xIndex, yIndex, hasWon, setChessOrder, setChessTurn }) => {
+const Chess = ({ chessType, chessTurn, xIndex, yIndex, hasWon, socket }) => {
   const [mouseHovered, setMouseHovered] = useState(false);
 
   const mouseHover = () => {
@@ -11,16 +11,7 @@ const Chess = ({ chessType, chessTurn, xIndex, yIndex, hasWon, setChessOrder, se
   };
 
   const handleChessClicked = () => {
-    setChessOrder((prevState) => [
-      ...prevState,
-      { xIndex: `${xIndex}`, yIndex: `${yIndex}`, chessType: chessTurn },
-    ]);
-    if (chessTurn === CHESS_TYPES.BLACK) {
-      setChessTurn(CHESS_TYPES.WHITE);
-    }
-    if (chessTurn === CHESS_TYPES.WHITE) {
-      setChessTurn(CHESS_TYPES.BLACK);
-    }
+    socket.emit('addChessOrder', { xIndex, yIndex, chessType: chessTurn });
   };
 
   const renderChessType = (type) => {
@@ -58,8 +49,6 @@ Chess.propTypes = {
   xIndex: PropTypes.string.isRequired,
   yIndex: PropTypes.string.isRequired,
   hasWon: PropTypes.bool.isRequired,
-  setChessOrder: PropTypes.func.isRequired,
-  setChessTurn: PropTypes.func.isRequired,
 };
 
 Chess.defaultProps = {
