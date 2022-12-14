@@ -48,7 +48,7 @@ workflows:
       - deploy-to-s3:
           context: Daniel-Personal-Website
           requires:
-            - test-and-build
+            - install-and-build
           filters:
             branches:
               only: master
