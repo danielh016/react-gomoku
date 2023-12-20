@@ -2,14 +2,14 @@ import queryString from 'query-string';
 import { useLocation, BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import { Chat, ChessBoard, Dialog, Entry } from './components';
+import { Chat, MultiChessBoard, Dialog, Entry, SingleChessBoard } from './components';
 import { CHESS_TYPES } from './utils/constants';
 import { setEmptyChessMap, updateChessMap, getWinningChessType } from './utils/functions';
 
 const ENDPOINT = 'http://18.206.247.59:4000';
 let socket;
 
-const App = () => {
+const MultiplayerApp = () => {
   const location = useLocation();
   const FIRST_TURN_COLOR = CHESS_TYPES.BLACK;
   const [chessOrder, setChessOrder] = useState([]);
@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <>
-      <ChessBoard
+      <MultiChessBoard
         firstTurnColor={FIRST_TURN_COLOR}
         chessMap={chessMap}
         chessTurn={chessTurn}
@@ -45,12 +45,42 @@ const App = () => {
   );
 };
 
+const SingleplayerApp = () => {
+  const FIRST_TURN_COLOR = CHESS_TYPES.BLACK;
+  const [chessOrder, setChessOrder] = useState([]);
+  const [chessTurn, setChessTurn] = useState(FIRST_TURN_COLOR);
+  const chessMap = setEmptyChessMap();
+  const chessTypeHasWon = getWinningChessType(chessOrder);
+  updateChessMap(chessOrder, chessMap);
+
+  return (
+    <>
+      <SingleChessBoard
+        firstTurnColor={FIRST_TURN_COLOR}
+        chessOrder={chessOrder}
+        chessMap={chessMap}
+        chessTurn={chessTurn}
+        hasWon={!!chessTypeHasWon}
+        setChessOrder={setChessOrder}
+        setChessTurn={setChessTurn}
+      />
+      <Dialog
+        chessTypeHasWon={chessTypeHasWon}
+        firstTurnColor={FIRST_TURN_COLOR}
+        setChessOrder={setChessOrder}
+        setChessTurn={setChessTurn}
+      />
+    </>
+  );
+};
+
 const RouterApp = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Entry />} />
-        <Route path="/game" element={<App />} />
+        <Route path="/entry" element={<Entry />} />
+        <Route path="/game" element={<MultiplayerApp />} />
+        <Route path="/" element={<SingleplayerApp />} />
       </Routes>
     </Router>
   );

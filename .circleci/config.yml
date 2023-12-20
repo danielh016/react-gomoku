@@ -10,34 +10,34 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Build the application
-          command: yarn build
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - package.json
-            - node_modules
-            - src
-            - build
-  deploy-to-s3:
-    executor: aws-cli/default
-    steps:
-      - attach_workspace:
-          at: .
-      - aws-cli/setup
-      - run:
-          name: Upload application to S3
-          command: aws s3 sync ./build s3://$REACT_GOMOKU_S3_BUCKET_NAME --delete
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
+      # - run:
+      #     name: Install dependencies
+      #     command: yarn install
+      # - save_cache:
+      #     key: dependency-cache-{{ checksum "package.json" }}
+      #     paths:
+      #       - node_modules
+      # - run:
+      #     name: Build the application
+      #     command: yarn build
+      # - persist_to_workspace:
+      #     root: ./
+      #     paths:
+      #       - package.json
+      #       - node_modules
+      #       - src
+      #       - build
+  # deploy-to-s3:
+  #   executor: aws-cli/default
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - aws-cli/setup
+  #     - run:
+  #         name: Upload application to S3
+  #         command: aws s3 sync ./build s3://$REACT_GOMOKU_S3_BUCKET_NAME --delete
 
 workflows:
   version: 2
@@ -45,10 +45,10 @@ workflows:
     jobs:
       - install-and-build:
           context: Daniel-Personal-Website
-      - deploy-to-s3:
-          context: Daniel-Personal-Website
-          requires:
-            - install-and-build
-          filters:
-            branches:
-              only: master
+      # - deploy-to-s3:
+      #     context: Daniel-Personal-Website
+      #     requires:
+      #       - install-and-build
+      #     filters:
+      #       branches:
+      #         only: master
