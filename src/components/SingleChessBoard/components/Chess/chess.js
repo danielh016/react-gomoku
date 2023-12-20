@@ -12,8 +12,6 @@ const Chess = ({ chessType, chessTurn, xIndex, yIndex, hasWon, setChessOrder, se
   };
 
   const handleChessClicked = () => {
-    console.log('here', chessType);
-    console.log('here', chessTurn);
     setChessOrder((prevState) => [
       ...prevState,
       { xIndex: `${xIndex}`, yIndex: `${yIndex}`, chessType: chessTurn },

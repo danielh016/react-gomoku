@@ -57,6 +57,7 @@ const SingleplayerApp = () => {
     <>
       <SingleChessBoard
         firstTurnColor={FIRST_TURN_COLOR}
+        chessOrder={chessOrder}
         chessMap={chessMap}
         chessTurn={chessTurn}
         hasWon={!!chessTypeHasWon}
