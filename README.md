@@ -4,7 +4,11 @@
 
 A Gomoku Game.
 
-### To Play
+### Play it now!
+
+https://danielh016.github.io/react-gomoku/
+
+### To Play Locally
 
 1. Clone the project
    ```
