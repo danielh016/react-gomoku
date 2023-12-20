@@ -76,11 +76,11 @@ const SingleplayerApp = () => {
 
 const RouterApp = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/entry" element={<Entry />} />
         <Route path="/game" element={<MultiplayerApp />} />
-        <Route path="/" element={<SingleplayerApp />} />
+        <Route exact path="/" element={<SingleplayerApp />} />
       </Routes>
     </Router>
   );
