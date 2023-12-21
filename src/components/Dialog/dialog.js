@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DialogContainer, VictoryMessage, ResetButton } from './dialogStyles';
 import { reverseChessTurn } from '../../utils/functions';
+import { getDefaultChessOrder, getFirstTurnColor } from '../../utils/constants';
 
-const Dialog = ({ chessTypeHasWon, socket, firstTurnColor, setChessOrder, setChessTurn }) => {
+const Dialog = ({ chessTypeHasWon, socket, isWhite, setChessOrder, setChessTurn }) => {
   const handleReset = () => {
     if (socket) {
       socket.emit('resetChessMap');
       return;
     }
-    setChessOrder([]);
-    setChessTurn(firstTurnColor);
+    setChessOrder(getDefaultChessOrder(isWhite));
+    setChessTurn(getFirstTurnColor(isWhite));
   };
 
   const handleUndo = () => {
@@ -37,7 +38,7 @@ const Dialog = ({ chessTypeHasWon, socket, firstTurnColor, setChessOrder, setChe
 
 Dialog.propTypes = {
   chessTypeHasWon: PropTypes.string,
-  firstTurnColor: PropTypes.string.isRequired,
+  isWhite: PropTypes.bool.isRequired,
   setChessOrder: PropTypes.func.isRequired,
   setChessTurn: PropTypes.func.isRequired,
 };

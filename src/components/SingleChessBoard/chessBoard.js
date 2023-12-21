@@ -5,14 +5,24 @@ import { ChessBoardContainer } from './chessBoardStyles';
 import { applyConditionalAiLogic } from '../../utils/functions/applyAiLogic';
 import { reverseChessTurn } from '../../utils/functions';
 
-const ChessBoard = ({ chessOrder, chessMap, chessTurn, hasWon, setChessOrder, setChessTurn }) => {
+const ChessBoard = ({
+  chessOrder,
+  chessMap,
+  chessTurn,
+  isWhite,
+  hasWon,
+  setChessOrder,
+  setChessTurn,
+}) => {
   useEffect(() => {
-    if (chessOrder.length % 2 === 1 && !hasWon) {
+    const placingOrder = isWhite ? chessOrder.length % 2 === 0 : chessOrder.length % 2 === 1;
+
+    if (placingOrder && !hasWon) {
       const aiChess = applyConditionalAiLogic(chessOrder, chessMap);
       setChessOrder((prevState) => [...prevState, aiChess]);
       reverseChessTurn(setChessTurn);
     }
-  }, [chessOrder, chessMap, setChessOrder, setChessTurn, hasWon]);
+  }, [chessOrder, chessMap, setChessOrder, setChessTurn, isWhite, hasWon]);
 
   return (
     <ChessBoardContainer>
@@ -35,6 +45,7 @@ const ChessBoard = ({ chessOrder, chessMap, chessTurn, hasWon, setChessOrder, se
 ChessBoard.propTypes = {
   chessMap: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   chessTurn: PropTypes.string.isRequired,
+  isWhite: PropTypes.bool.isRequired,
   hasWon: PropTypes.bool.isRequired,
   setChessOrder: PropTypes.func.isRequired,
   setChessTurn: PropTypes.func.isRequired,
