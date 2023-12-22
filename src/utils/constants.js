@@ -27,3 +27,11 @@ export const COUNT_DIRECTION = {
   FORWARD: 'FORWARD',
   BACKWARD: 'BACKWARD',
 };
+
+export const getFirstTurnColor = (isWhite) => {
+  return isWhite ? CHESS_TYPES.WHITE : CHESS_TYPES.BLACK;
+};
+
+export const getDefaultChessOrder = (isWhite) => {
+  return isWhite ? [{ xIndex: '7', yIndex: '7', chessType: CHESS_TYPES.BLACK }] : [];
+};

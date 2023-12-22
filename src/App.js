@@ -3,7 +3,7 @@ import { useLocation, BrowserRouter as Router, Route, Routes } from 'react-route
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { Chat, MultiChessBoard, Dialog, Entry, SingleChessBoard } from './components';
-import { CHESS_TYPES } from './utils/constants';
+import { CHESS_TYPES, getDefaultChessOrder, getFirstTurnColor } from './utils/constants';
 import { setEmptyChessMap, updateChessMap, getWinningChessType } from './utils/functions';
 
 const ENDPOINT = 'http://18.206.247.59:4000';
@@ -45,9 +45,9 @@ const MultiplayerApp = () => {
   );
 };
 
-const SingleplayerApp = () => {
-  const FIRST_TURN_COLOR = CHESS_TYPES.BLACK;
-  const [chessOrder, setChessOrder] = useState([]);
+const SingleplayerApp = ({ isWhite = false }) => {
+  const FIRST_TURN_COLOR = getFirstTurnColor(isWhite);
+  const [chessOrder, setChessOrder] = useState(getDefaultChessOrder(isWhite));
   const [chessTurn, setChessTurn] = useState(FIRST_TURN_COLOR);
   const chessMap = setEmptyChessMap();
   const chessTypeHasWon = getWinningChessType(chessOrder);
@@ -56,17 +56,17 @@ const SingleplayerApp = () => {
   return (
     <>
       <SingleChessBoard
-        firstTurnColor={FIRST_TURN_COLOR}
         chessOrder={chessOrder}
         chessMap={chessMap}
         chessTurn={chessTurn}
+        isWhite={isWhite}
         hasWon={!!chessTypeHasWon}
         setChessOrder={setChessOrder}
         setChessTurn={setChessTurn}
       />
       <Dialog
         chessTypeHasWon={chessTypeHasWon}
-        firstTurnColor={FIRST_TURN_COLOR}
+        isWhite={isWhite}
         setChessOrder={setChessOrder}
         setChessTurn={setChessTurn}
       />
@@ -80,6 +80,7 @@ const RouterApp = () => {
       <Routes>
         <Route path="/entry" element={<Entry />} />
         <Route path="/game" element={<MultiplayerApp />} />
+        <Route path="/white" element={<SingleplayerApp isWhite />} />
         <Route exact path="/" element={<SingleplayerApp />} />
       </Routes>
     </Router>
