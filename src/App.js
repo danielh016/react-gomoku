@@ -76,12 +76,12 @@ const SingleplayerApp = ({ isWhite = false }) => {
 
 const RouterApp = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/entry" element={<Entry />} />
         <Route path="/game" element={<MultiplayerApp />} />
-        <Route path="/" element={<SingleplayerApp />} />
         <Route path="/white" element={<SingleplayerApp isWhite />} />
+        <Route exact path="/" element={<SingleplayerApp />} />
       </Routes>
     </Router>
   );
