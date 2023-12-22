@@ -45,7 +45,7 @@ const initAnalysisResult = () => {
   analysisResults.human3HalfAlives = [];
 };
 
-const startAnalysis = (currentChess, chessOrder, chessMap) => {
+const startAnalysis = (aiChessType, currentChess, chessOrder, chessMap) => {
   if (chessOrder.length === 1) {
     return getFirstPosition(currentChess);
   }
@@ -58,11 +58,12 @@ const startAnalysis = (currentChess, chessOrder, chessMap) => {
 
   const allEmptyPoints = getAllEmptyPoints(chessMap);
 
+  const humanChessType = aiChessType === CHESS_TYPES.BLACK ? CHESS_TYPES.WHITE : CHESS_TYPES.BLACK;
   const humanExistingPositions = chessOrder
-    .filter((chess) => chess.chessType === CHESS_TYPES.BLACK)
+    .filter((chess) => chess.chessType === humanChessType)
     .map((chess) => ({ xIndex: chess.xIndex, yIndex: chess.yIndex }));
   const computerExistingPositions = chessOrder
-    .filter((chess) => chess.chessType === CHESS_TYPES.WHITE)
+    .filter((chess) => chess.chessType === aiChessType)
     .map((chess) => ({ xIndex: chess.xIndex, yIndex: chess.yIndex }));
 
   // 3. start first analysis
@@ -111,7 +112,7 @@ export const applyConditionalAiLogic = (chessOrder, chessMap) => {
   const aiChessType =
     currentChess.chessType === CHESS_TYPES.BLACK ? CHESS_TYPES.WHITE : CHESS_TYPES.BLACK;
 
-  const nextPosition = startAnalysis(currentChess, parsedChessOrder, chessMap);
+  const nextPosition = startAnalysis(aiChessType, currentChess, parsedChessOrder, chessMap);
 
   return {
     xIndex: `${nextPosition.xIndex}`,
