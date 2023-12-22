@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { useLocation, BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useLocation, HashRouter as Router, Route, Routes } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { Chat, MultiChessBoard, Dialog, Entry, SingleChessBoard } from './components';
@@ -76,7 +76,7 @@ const SingleplayerApp = ({ isWhite = false }) => {
 
 const RouterApp = () => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Routes>
         <Route path="/entry" element={<Entry />} />
         <Route path="/game" element={<MultiplayerApp />} />
