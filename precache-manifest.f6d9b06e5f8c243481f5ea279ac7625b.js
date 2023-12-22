@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "348bdfe06d5b8315206c4a1bd8e3a37a",
+    "revision": "5e86241bbfd059e3a3f3edbbc66bc5a7",
     "url": "/react-gomoku/index.html"
   },
   {
-    "revision": "a9e6a90d8914eee1d82b",
+    "revision": "7251c85fe37d3309f20e",
     "url": "/react-gomoku/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "d5e7e9ae8be87ad2a600",
-    "url": "/react-gomoku/static/js/2.2eb0d1b1.chunk.js"
+    "revision": "5784e6d53c90504446e9",
+    "url": "/react-gomoku/static/js/2.befd2d06.chunk.js"
   },
   {
     "revision": "c9d95c37022699f4b97f62fb71120cee",
-    "url": "/react-gomoku/static/js/2.2eb0d1b1.chunk.js.LICENSE.txt"
+    "url": "/react-gomoku/static/js/2.befd2d06.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a9e6a90d8914eee1d82b",
-    "url": "/react-gomoku/static/js/main.235dca54.chunk.js"
+    "revision": "7251c85fe37d3309f20e",
+    "url": "/react-gomoku/static/js/main.7cafaa95.chunk.js"
   },
   {
     "revision": "7896df0a444d0501b721",
